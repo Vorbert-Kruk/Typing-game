@@ -1,0 +1,83 @@
+:root {
+    --dark-color: #232323;
+    --light-color: #F4F4F4;
+    --correct-color: hsl(100, 75%, 70%);
+    --incorrect-color: hsl(0, 75%, 65%);
+
+    --letter-size: calc(35px + 25 * ((100vw - 320px) / 680));
+    --letter-line-color: var(--light-color);
+
+    --transition-delay: 150ms;
+}
+* {
+    margin: 0;
+    padding: 0;
+    outline: none !important;
+}
+body {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    font-family: Helvetica, sans-serif;
+}
+.words-container {
+    position: absolute;
+    display: flex;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* background-color: red; */
+    flex-direction: row;
+}
+.words-container .letter {
+    position: relative;
+    font-weight: bold;
+    font-size: var(--letter-size);
+    user-select: none;
+    transition: color var(--transition-delay) ease;
+}
+.words-container .letter.correct {
+    color: var(--correct-color);
+}
+.words-container .letter.incorrect {
+    color: var(--incorrect-color);
+}
+.words-container .letter:not(:first-of-type) {
+    margin-left: calc(var(--letter-size) * .15);
+}
+.words-container .letter::after {
+    content: '';
+    position: absolute;
+    bottom: 2.5%;
+    left: 6%;
+    width: 90%;
+    height: calc(var(--letter-size) * .055);
+    background-color: var(--letter-line-color);
+    transition: background-color var(--transition-delay) ease;
+}
+.words-container .letter.correct::after {
+    background-color: var(--correct-color);
+}
+.words-container .letter.incorrect::after {
+    background-color: var(--incorrect-color);
+}
+/*
+    Score section
+*/
+.score {
+    position: absolute;
+    font-size: calc(var(--letter-size) * .5);
+    bottom: calc(var(--letter-size) * .5);
+    right: calc(var(--letter-size) * .5);
+    font-weight: bold;
+    user-select: none;
+}
+/*
+    Canvas section
+*/
+canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+}
